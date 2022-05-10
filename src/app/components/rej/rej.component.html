@@ -1,0 +1,19 @@
+<kendo-grid #grid
+            [reorderable]="true"
+            [resizable]="true"
+            [height]="500"
+            [groupable]="true"
+            [group]="groups"
+            [data]="gridSettings.gridData"
+            (groupChange)="groupChange($event)"
+            (columnReorder)="saveInGrid(grid)">
+
+    <kendo-grid-column *ngFor="let item of categories"
+                        field= {{item.field}}
+                        title= {{item.title}}
+                        [width]="80"
+                        [class]="{'text-center':true}"
+                        [resizable]="false">
+
+    </kendo-grid-column>
+</kendo-grid>

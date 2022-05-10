@@ -1,0 +1,14 @@
+<div id="centrar">
+  <h1 mat-dialog-title class="bg-primary p-1" style="color: white;">Reordenar columnas</h1>
+  <div mat-dialog-content>
+      <ul class="list-group" cdkDropList (cdkDropListDropped)="drop($event)">
+          <li class="list-group-item" *ngFor="let item of aux" cdkDrag>
+            {{item.title}}
+          </li>
+      </ul>
+  </div>
+  <div mat-dialog-actions style="float: right;">
+      <button mat-button class="bg-danger p-2 m-2" style="color: white;" (click)="onNoClick()"> X </button>
+      <button mat-button class="bg-primary p-2 m-2" style="color: white;" (click)="save()">Guardar</button>
+  </div>
+</div>
