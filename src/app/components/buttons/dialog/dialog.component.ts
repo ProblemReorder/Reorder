@@ -33,7 +33,7 @@ export class DialogComponent implements OnInit {
 
   //Metodo para cerrar el modal
   onNoClick():void{
-    this.dialogRef.close(this.aux);
+    this.dialogRef.close(this.data);
   }
 
   //Metodo para guardar la información en el localStorage desde el modal
