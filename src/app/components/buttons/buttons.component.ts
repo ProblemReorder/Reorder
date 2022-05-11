@@ -1,9 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { ColumnBase, GridComponent } from '@progress/kendo-angular-grid';
-import { isThisTypeNode } from 'typescript';
 
 export interface ColumnFooType {
   field: string;
