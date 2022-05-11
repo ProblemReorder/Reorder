@@ -16,7 +16,6 @@ import { GridModule } from '@progress/kendo-angular-grid';
 import { RejComponent } from './components/rej/rej.component';
 import { ButtonsComponent } from './components/buttons/buttons.component';
 import { DialogComponent } from './components/buttons/dialog/dialog.component';
-//import { DialogComponent } from './components/dialog/dialog.component';
 
 
 @NgModule({
@@ -25,7 +24,6 @@ import { DialogComponent } from './components/buttons/dialog/dialog.component';
     ButtonsComponent,
     RejComponent,
     DialogComponent,
-    //DialogComponent
   ],
   imports: [
     BrowserModule,

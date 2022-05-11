@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, AfterViewInit  } from '@angular/core';
 import { GridComponent } from '@progress/kendo-angular-grid';
 import { ColumnFooType } from '../buttons/buttons.component';
 import { GroupDescriptor, process, DataResult } from "@progress/kendo-data-query";
@@ -19,15 +19,18 @@ export interface Products {
 @Component({
   selector: 'app-rej',
   templateUrl: './rej.component.html',
-  styleUrls: ['./rej.component.css']
 })
-export class RejComponent implements OnInit {
+export class RejComponent implements OnInit, AfterViewInit {
 
   /* Realizamos un Input para que le padre le pase el
-     array de categories, y realizamos un Output para
-     pasarle al padre el GridComponent*/
+     array de categories.
+     Realizamos un Output para pasarle, el GridComponent,
+     al padre.
+     Realizamos un ViewChild para poder emitir, el GridComponent,
+     al padre desde el ngAfterViewInit*/
   @Input() categories:ColumnFooType[] = [];
   @Output() newItemEvent = new EventEmitter<GridComponent>();
+  @ViewChild("grid") gridComp!: GridComponent;
 
 
   /* Creamos 2 variables.
@@ -59,11 +62,8 @@ export class RejComponent implements OnInit {
   /* Creamos otras 2 variables.
     Una de ellas serán los grupos, por lo que será filtrado.
     Y la otra de ellas será el resultado de esa filtración.*/
-
   public groups: GroupDescriptor[] = [];
   public gridView: DataResult;
-
-  constructor() { }
 
   ngOnInit(): void {
     this.loadProducts();
@@ -74,8 +74,14 @@ export class RejComponent implements OnInit {
   }
 
   /*Metodo que emite el GridComponent al padre
-    cada vez que se ordenan las columnas del grid.*/
+    cada vez que termine de visualizadlo todo
+    el componente*/
+  ngAfterViewInit(): void {
+    this.newItemEvent.emit(this.gridComp);
+  }
 
+  /*Metodo que emite el GridComponent al padre
+    cada vez que se ordenan las columnas del grid.*/
   saveInGrid(e:GridComponent){
     this.newItemEvent.emit(e);
   }

@@ -3,6 +3,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { ColumnBase, GridComponent } from '@progress/kendo-angular-grid';
+import { isThisTypeNode } from 'typescript';
 
 export interface ColumnFooType {
   field: string;
@@ -13,10 +14,14 @@ export interface ColumnFooType {
 @Component({
   selector: 'app-buttons',
   templateUrl: './buttons.component.html',
-  styleUrls: ['./buttons.component.css']
 })
 export class ButtonsComponent implements OnInit {
-  //Pasamos el array del padre al hijo
+  /*Realizamos un Input para que le padre le pase el
+    array de categories.
+    Realizamos un Input para que le padre le pase el
+    elemento GridComponent.
+    Realizamos un Output para pasarle, el array de categories,
+    al padre.*/
   @Input() categories: ColumnFooType[] = [];
   @Input() grid: GridComponent;
   @Output() nuevo = new EventEmitter<ColumnFooType[]>();
@@ -43,6 +48,7 @@ export class ButtonsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       this.aux = result;
+      this.nuevo.emit(this.aux);
     });
   }
 

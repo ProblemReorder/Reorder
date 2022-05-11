@@ -1,13 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ColumnFooType } from './components/buttons/buttons.component';
 import { GridComponent } from '@progress/kendo-angular-grid';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent{
   title = 'Reorder';
 
   //Creamos el array de los titulos de las columnas para el grid
@@ -38,27 +37,16 @@ export class AppComponent implements OnInit{
     }
   ];
 
-  //Creamos la variable que recibirá el GridComponent
+  //Creamos la variable que recibirá el GridComponent del RejComponent
   grid:GridComponent;
 
-  constructor(){
-    localStorage.setItem("columnsOrg",JSON.stringify(this.categories));
-  }
-
-  ngOnInit(){
-    const savedColumnsOrg: ColumnFooType[] = JSON.parse(localStorage.getItem("columnsOrg"));
-    if (savedColumnsOrg) {
-      this.categories = savedColumnsOrg;
-    }
-  }
-
-  //Pasamos el grid del hijo GridComponent al padre
+  //Pasamos el grid del hijo RejComponent al padre
   addItem(e:GridComponent){
     this.grid=e;
   }
 
-    //Pasamos el grid del hijo GridComponent al padre
-    addItem1(e:ColumnFooType[]){
-      this.categories=e;
-    }
+  //Pasamos el array de categorias del hijo ButtonsComponent al padre
+  addItem1(e:ColumnFooType[]){
+    this.categories=e;
+  }
 }
