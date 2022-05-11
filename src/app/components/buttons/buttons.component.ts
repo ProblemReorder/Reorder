@@ -43,12 +43,12 @@ export class ButtonsComponent implements OnInit {
   openDialog():void{
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '500px',
-      data: this.aux
+      data: this.categories
     });
 
     dialogRef.afterClosed().subscribe(result => {
       this.aux = result;
-      this.nuevo.emit(this.aux);
+      this.aux===undefined ? this.nuevo.emit(this.categories) : this.nuevo.emit(this.aux);
     });
   }
 
